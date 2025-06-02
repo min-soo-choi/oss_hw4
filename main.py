@@ -49,3 +49,22 @@ async def calculate_gpa(data: ScoreRequest):
             "total_credits": total_credits
         }
     }
+
+from fastapi.responses import HTMLResponse
+
+@app.get("/score", response_class=HTMLResponse)
+async def score_info():
+    return """
+    <h2>📌 GPA 계산 API 안내</h2>
+    <p>이 엔드포인트는 <strong>POST 방식</strong>으로 JSON 데이터를 받아 GPA를 계산합니다.</p>
+    <pre>
+    {
+      "student_id": "2023123456",
+      "name": "홍길동",
+      "courses": [
+        {"course_code": "I040-1", "course_name": "컴퓨터개론", "credits": 3, "grade": "A+"}
+      ]
+    }
+    </pre>
+    """
+
